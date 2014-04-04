@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import markehme.simpletownsxtras.SimpleTownsXtras;
+
 import org.bukkit.ChatColor;
 import org.bukkit.Chunk;
 import org.bukkit.World;
@@ -26,6 +28,8 @@ public class WorldGuardListener implements Listener {
 	
 	public WorldGuardListener() {
 		worldGuardPlugin = WorldGuardPlugin.inst();
+		
+		SimpleTownsXtras.log("WorldGuard features enabled.");
 	}
 	
 	@EventHandler
@@ -36,7 +40,8 @@ public class WorldGuardListener implements Listener {
 		}
 		
 		if(isRegionThere((Player) e.getSender())) {
-			
+			e.getSender().sendMessage(ChatColor.RED + "You can't create a town here as there is a region in the way, please claim somewhere else.");
+			e.setCancelled(true);
 		}
 	}
 	
