@@ -48,7 +48,7 @@ public class ExplosionListener implements Listener {
 				if(currentTown == null) return;
 				
 				// If not in same town as where to exploded, then remove
-				if(townPrimedIn != currentTown) {
+				if(townPrimedIn.getName() != currentTown.getName()) {
 					e.blockList().remove(block);
 				}
 				
