@@ -45,7 +45,7 @@ public class ExplosionListener implements Listener {
 				Town currentTown = SimpleTownsXtras.simpleTowns.getTown(block.getChunk());
 				
 				// If no town, continue explosion
-				if(currentTown == null) return;
+				if(currentTown == null) break;
 				
 				// If not in same town as where to exploded, then remove
 				if(townPrimedIn.getName() != currentTown.getName()) {
