@@ -4,6 +4,7 @@ import markehme.simpletownsxtras.listeners.*;
 
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.plugin.PluginManager;
 
 import com.gmail.jameshealey1994.simpletowns.events.TownClaimEvent;
@@ -34,6 +35,12 @@ public class SimpleTownsXtrasListeners {
 			}
 		}
 		
+		// Explosion related features
+		if(SimpleTownsXtras.config.getBoolean("explosions.disallowTNTIfFromOutsideTown") || SimpleTownsXtras.config.getBoolean("explosions.disallowCreepersInTowns")) {
+			register(new ExplosionListener());
+		}
+		
+		
 	}
 	
 	/**
@@ -42,6 +49,7 @@ public class SimpleTownsXtrasListeners {
 	public void deRegister() {
 		TownClaimEvent.getHandlerList().unregister(SimpleTownsXtras.instance); 
 		TownCreateEvent.getHandlerList().unregister(SimpleTownsXtras.instance); 
+		EntityExplodeEvent.getHandlerList().unregister(SimpleTownsXtras.instance);
 	}
 	
 	/** 
