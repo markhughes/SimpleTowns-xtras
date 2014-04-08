@@ -78,8 +78,8 @@ public class ExplosionListener implements Listener {
 					break;
 				}
 								
-				// If the town names don't match, don't break the block
-				if(townPrimedIn.getName() != currentTown.getName()) {
+				// If the town names don't match, don't explode the block
+				if(townPrimedIn.equals(currentTown)) {
 					e.blockList().remove(block);
 				}
 			}
