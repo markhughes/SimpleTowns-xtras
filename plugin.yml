@@ -2,7 +2,7 @@ name: SimpleTownsXtras
 main: markehme.simpletownsxtras.SimpleTownsXtras
 author: MarkehMe
 website: http://markeh.me
-version: 1.0.0
+version: 1.0.1
 depend: [ SimpleTowns, Vault ]
 soft-depend: [ WorldGuard ]
 dev-url: http://dev.bukkit.org/bukkit-plugins/simpletownsxtras/
