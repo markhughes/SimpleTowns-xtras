@@ -60,6 +60,10 @@ public class WorldGuardListener implements Listener {
 	
 	private boolean isRegionThere(Player checkPlayer) {
 		
+		if(SimpleTownsXtras.permission.playerHas(checkPlayer, "SimpleTownsXtras.WorldGuard.canclaimall")) {
+			return false;
+		}
+		
 		World world = checkPlayer.getWorld();
 		
 		Chunk chunk = world.getChunkAt( checkPlayer.getLocation() );
@@ -92,8 +96,13 @@ public class WorldGuardListener implements Listener {
 				foundregions = false;
 			} else {
 				for(ProtectedRegion currentRegion : overlaps) {
-					if(!currentRegion.getMembers().contains(checkPlayer.getName())) {
-						foundregions = true;
+					
+					if(!currentRegion.getMembers().contains(checkPlayer.getName()) && !currentRegion.getOwners().contains(checkPlayer.getName())) {
+						
+						// Is it claimable?
+						if(!SimpleTownsXtras.permission.playerHas(checkPlayer, "SimpleTownsXtras.WorldGuard.claimable." + currentRegion.getId().toLowerCase())) {
+							foundregions = true;
+						}
 					}
 				}
 			}
