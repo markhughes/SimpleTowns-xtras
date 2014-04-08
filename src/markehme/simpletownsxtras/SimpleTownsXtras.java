@@ -8,12 +8,20 @@ import markehme.simpletownsxtras.utilities.Metrics.Graph;
 import net.milkbowl.vault.permission.Permission;
 
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.gmail.jameshealey1994.simpletowns.SimpleTowns;
 
+/**
+ * SimpleTownsXtras
+ * This code is slightly un-documented - sorry about that!
+ * 
+ * @author markhughes
+ *
+ */
 public class SimpleTownsXtras extends JavaPlugin {
 	
 	public static Plugin instance;
@@ -24,11 +32,22 @@ public class SimpleTownsXtras extends JavaPlugin {
 	
 	private Metrics metrics;
 	
+	public static FileConfiguration config = null;
+	
 	@Override
 	public void onEnable() {
 		
 		// Store current instance for later
 		instance = this;
+		
+		// Get SimpleTowns
+		simpleTowns = (SimpleTowns) Bukkit.getPluginManager().getPlugin("SimpleTowns");
+		
+		// Save default config
+		saveDefaultConfig(); 
+		
+		// Load the configuration
+		config = this.getConfig();
 		
 		// Setup Vault
 		RegisteredServiceProvider<Permission> permissionProvider = getServer().getServicesManager().getRegistration( net.milkbowl.vault.permission.Permission.class );
@@ -70,7 +89,6 @@ public class SimpleTownsXtras extends JavaPlugin {
 	}
 	
 	public void addCommand() {
-		simpleTowns = (SimpleTowns) Bukkit.getPluginManager().getPlugin("SimpleTowns");
 		
 		//simpleTowns.getCommandEnvironment(). = new CommandHome();
 	}
