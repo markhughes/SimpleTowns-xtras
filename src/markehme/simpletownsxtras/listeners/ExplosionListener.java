@@ -56,7 +56,6 @@ public class ExplosionListener implements Listener {
 		// TNT Fix 
 		if(SimpleTownsXtras.config.getBoolean("explosions.disallowTNTIfFromOutsideTown") && e.getEntity().getType() == EntityType.PRIMED_TNT){
 			
-			SimpleTownsXtras.log(e.getEntity().getMetadata("SimpleTownsXtras-primed").get(0).asString());
 			// Grab the meta data we set in ExplosionPrimeEvent
 			String[] metaData = e.getEntity().getMetadata("SimpleTownsXtras-primed").get(0).asString().split(" ");
 			
@@ -67,15 +66,6 @@ public class ExplosionListener implements Listener {
 			// Get town that it was primed in
 			Town townPrimedIn = SimpleTownsXtras.simpleTowns.getTown(chunkIn);
 			
-			String primedIn;
-			if(townPrimedIn == null) {
-				primedIn = "notown";
-			} else {
-				primedIn = townPrimedIn.getName();
-			}
-			
-			SimpleTownsXtras.log("Primed in " + primedIn);
-			
 			// work with a copy 
 			ArrayList<Block> listOfBlocks = new ArrayList<Block>(e.blockList());
 			
@@ -85,17 +75,13 @@ public class ExplosionListener implements Listener {
 				
 				// If no town, continue explosion
 				if(currentTown == null)  {
-					SimpleTownsXtras.log("Block in notown - no change");
 					break;
 				}
-				
-				SimpleTownsXtras.log("Block in " + currentTown.getName());
-				
+								
 				// If the town names don't match, don't break the block
 				if(townPrimedIn.getName() != currentTown.getName()) {
 					e.blockList().remove(block);
 				}
-				
 			}
 		}
 	}
