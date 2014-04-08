@@ -1,0 +1,4 @@
+explosions:
+  disallowTNTIfFromOutsideTown: false
+  disallowCreepersInTowns: false
+  
