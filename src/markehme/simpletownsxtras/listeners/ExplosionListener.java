@@ -1,6 +1,5 @@
 package markehme.simpletownsxtras.listeners;
 
-
 import java.util.ArrayList;
 
 import markehme.simpletownsxtras.SimpleTownsXtras;
@@ -21,6 +20,12 @@ import org.bukkit.metadata.FixedMetadataValue;
 import com.gmail.jameshealey1994.simpletowns.object.Town;
 
 public class ExplosionListener implements Listener {
+	
+	public ExplosionListener() {
+		
+		SimpleTownsXtras.log("Explosions features enabled.");
+		
+	}
 	
 	@EventHandler(priority=EventPriority.LOWEST)
 	public void onPreExplosionEvent(ExplosionPrimeEvent e) {
@@ -50,7 +55,6 @@ public class ExplosionListener implements Listener {
 				e.blockList().clear();
 			}
 			
-			return;
 		}
 		
 		// TNT Fix 
@@ -71,16 +75,24 @@ public class ExplosionListener implements Listener {
 			
 			// Loop through each block thats being destroyed and see if it's in a Town
 			for(Block block : listOfBlocks) {
+				
 				Town currentTown = SimpleTownsXtras.simpleTowns.getTown(block.getChunk());
 				
 				// If no town, continue explosion
-				if(currentTown == null)  {
-					break;
+				if(currentTown == null) {
+					continue;
 				}
-								
-				// If the town names don't match, don't explode the block
-				if(townPrimedIn.equals(currentTown)) {
+				
+				if(townPrimedIn == null) {
+					// Primed in notown, and currenttown is not notown - so don't expode the block!
 					e.blockList().remove(block);
+					continue;
+				}
+				
+				// If the town names don't match, don't explode the block
+				if(!townPrimedIn.getName().equals(currentTown.getName())) {
+					e.blockList().remove(block);
+				} else {
 				}
 			}
 		}
